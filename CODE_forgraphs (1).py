@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
 
 import csv, math
 import pandas as pd
@@ -14,32 +9,18 @@ import statsmodels.api as sm
 import plotly.express as px
 
 
-# In[ ]:
-
-
 pf = pd.read_html('https://www.nbastuffer.com/2020-2021-nba-player-stats/', index_col=0, header=0, 
                     skiprows=[21])[0]
-
-
-# In[ ]:
-
 
 pf.head()
 
 
-# In[ ]:
+pf.reset_index()
+
 
 
 pf.reset_index()
 
-
-# In[ ]:
-
-
-pf.reset_index()
-
-
-# In[ ]:
 
 
 import matplotlib.ticker as ticker
@@ -57,22 +38,10 @@ plt.gca().xaxis.set_major_formatter(ticker.PercentFormatter())
 plt.show()
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 pf_team = pf.groupby('TEAM').sum()
 pf_team = pf_team.reset_index()
 pf_team.head(16)
 pf_team = pf_team.reindex([9, 12, 0, 5, 14, 11, 4, 2, 7, 15, 3, 10, 13, 8, 1, 6])
-
-
-# In[ ]:
 
 
 fig2 = pf_team.plot.bar(x= 'TEAM', y='PPGPointsPoints per game.',                        color=['darkgreen', 'darkorange', 'black', 'mediumblue', 'gold', 'red', 'midnightblue', 'black',                             'mediumblue', 'red', 'silver', 'orange', 'red', 'hotpink', 'green', 'purple'],                         title='Total Points Per Team' )
@@ -81,35 +50,21 @@ fig2.set_xlabel('Team')
 fig2.get_legend().remove()
 
 
-# In[ ]:
-
-
 pf_team2 = pf.groupby('TEAM').mean()
 pf_team2 = pf_team2.reset_index()
 list(pf.columns)
 pf_team2.head(12)
 
-
-# In[ ]:
-
-
 list(pf_team2.columns)
-
-
-# In[ ]:
 
 
 pf_team2 = pf_team2[['TEAM', 'FT%', '2P%', '3P%', 'eFG%Effective Shooting PercentageWith eFG%, three-point shots made are worth 50% more than two-point shots made. eFG% Formula=(FGM+ (0.5 x 3PM))/FGA', 'TRB%Total Rebound PercentageTotal rebound percentage is estimated percentage of available rebounds grabbed by the player while the player is on the court.','TO%Turnover RateA metric that estimates the number of turnovers a player commits per 100 possessions']]
 pf_team22 = pf_team2.loc[(pf_team2['TEAM'] == 'Mil') | (pf_team2['TEAM'] == 'Pho')]
 
 
-# In[ ]:
-
 
 pf_team22.head()
 
-
-# In[ ]:
 
 
 def turn_to_percent(df, colname):
@@ -122,10 +77,6 @@ pf_team22 = turn_to_percent(pf_team22, '3P%')
 pf_team22 = turn_to_percent(pf_team22, 'eFG%Effective Shooting PercentageWith eFG%, three-point shots made are worth 50% more than two-point shots made. eFG% Formula=(FGM+ (0.5 x 3PM))/FGA')
 
 
-# In[ ]:
-
-
-
 listOfDFRows = pf_team22.to_numpy().tolist()
 mil_means1 = listOfDFRows[0]
 mil_means1.pop(0)
@@ -134,8 +85,6 @@ pho_means1.pop(0)
 
 print(mil_means1, pho_means1)
 
-
-# In[ ]:
 
 
 import matplotlib.ticker as mtick
@@ -159,14 +108,9 @@ fig.tight_layout()
 plt.show()
 
 
-# In[ ]:
-
 
 pf_player_short = pf[['FULL NAME', 'FT%', '2P%', '3P%', 'eFG%Effective Shooting PercentageWith eFG%, three-point shots made are worth 50% more than two-point shots made. eFG% Formula=(FGM+ (0.5 x 3PM))/FGA', 'MIN%Minutes PercentagePercentage of team minutes used by a player while he was on the floor']]
 dev_giannis = pf_player_short.loc[(pf_player_short['FULL NAME'] == 'Devin Booker') | (pf_player_short['FULL NAME'] == 'Giannis Antetokounmpo')]
-
-
-# In[ ]:
 
 
 dev_giannis = turn_to_percent(dev_giannis, 'FT%')
@@ -175,13 +119,8 @@ dev_giannis = turn_to_percent(dev_giannis, '3P%')
 dev_giannis = turn_to_percent(dev_giannis, 'eFG%Effective Shooting PercentageWith eFG%, three-point shots made are worth 50% more than two-point shots made. eFG% Formula=(FGM+ (0.5 x 3PM))/FGA')
 
 
-# In[ ]:
-
 
 dev_giannis.head()
-
-
-# In[ ]:
 
 
 listOfDFRows = dev_giannis.to_numpy().tolist()
@@ -192,8 +131,6 @@ giannis.pop(0)
 
 print(dev, giannis)
 
-
-# In[ ]:
 
 
 import matplotlib.ticker as mtick
@@ -215,9 +152,6 @@ ax.legend()
 fig.tight_layout()
 
 plt.show()
-
-
-# In[ ]:
 
 
 
