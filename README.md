@@ -1,4 +1,4 @@
-Hello if you are here welcome! Here in the main branch you can find a collection of previous work including a machine learning semi-final model for the NBA and the power points accomanying them. The other branches are related to this project. If you have any questions contact me I would love to chat!
+Hello if you are here welcome! Here in the main branch you can find a collection of previous work.  If you have any questions contact me I would love to chat!
 
 
 
